@@ -1,6 +1,6 @@
 pipeline {
 	agent any
-	 try {
+	
 	stages {
 		
 		stage("Compile") {
@@ -32,11 +32,12 @@ pipeline {
             		}
             		step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
         	}
-		}
+		
 		
 	}
-	catch (Exception e) {
-       			 currentBuild.result = "FAILURE"
-        		step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
-    		}
+	post { 
+        always { 
+            step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
+        }
+    }
 }
