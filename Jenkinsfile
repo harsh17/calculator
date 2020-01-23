@@ -33,6 +33,9 @@ pipeline {
 		
            			 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
 				}
+			finally {
+           			  echo "in finally"
+         			 }
 			}
 		
         }
