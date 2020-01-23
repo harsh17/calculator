@@ -1,7 +1,8 @@
 pipeline {
 	agent any
+	 try {
 	stages {
-		 try {
+		
 		stage("Compile") {
 			steps {
 				sh "./gradlew compileJava"
@@ -32,9 +33,10 @@ pipeline {
             		step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
         	}
 		}
-		catch (Exception e) {
+		
+	}
+	catch (Exception e) {
        			 currentBuild.result = "FAILURE"
         		step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
     		}
-	}
 }
