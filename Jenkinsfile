@@ -28,9 +28,13 @@ pipeline {
 	}
 	post { 
         always { 
-		steps {
-           		 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
-		}
+		script {
+         		 try {
+		
+           			 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
+				}
+			}
+		
         }
     }
 }
