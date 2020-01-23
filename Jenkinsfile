@@ -31,7 +31,7 @@ pipeline {
 		script {
          		 try {
 		
-           			 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
+           			 step([$class: 'influxDbGlobalConfig', customData: null, customDataMap: null, customPrefix: null, selectedTarget: 'grafana'])
 				}
 			finally {
            			  echo "in finally"
