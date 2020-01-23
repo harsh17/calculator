@@ -24,20 +24,13 @@ pipeline {
 				sh "./gradlew jacocoTestCoverageVerification"
 				}
 			}
-		 stage('Report') { //(4)
-           		 if (currentBuild.currentResult == 'UNSTABLE') {
-                		currentBuild.result = "UNSTABLE"
-            		} else {
-                		currentBuild.result = "SUCCESS"
-            		}
-            		step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
-        	}
-		
 		
 	}
 	post { 
         always { 
-            step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
+		steps {
+           		 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, target: 'grafana'])
+		}
         }
     }
 }
