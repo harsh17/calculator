@@ -21,7 +21,7 @@ pipeline {
 						reportFiles: 'index.html',
 						reportName: "JaCoCo Report"
 						])
-				sh "./gradlew jacocoTestCoverageVerification"
+			//	sh "./gradlew jacocoTestCoverageVerification"
 				}
 			}
 		
@@ -31,7 +31,7 @@ pipeline {
 		script {
          		 try {
 		
-           			 step([$class: 'influxDbGlobalConfig', customData: null, customDataMap: null, customPrefix: null, selectedTarget: 'grafana'])
+           			 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, selectedTarget: 'grafana'])
 				}
 			finally {
            			  echo "in finally"
