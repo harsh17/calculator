@@ -21,7 +21,7 @@ pipeline {
 						reportFiles: 'index.html',
 						reportName: "JaCoCo Report"
 						])
-					sh "./gradlew jacocoTestCoverageVerification"
+				//	sh "./gradlew jacocoTestCoverageVerification"
 				script {
 					step([$class: 'JacocoPublisher', execPattern: '**/target/jacoco.exec'])
 					}
