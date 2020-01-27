@@ -17,7 +17,7 @@ pipeline {
 					}
 				}
 			}
-		stage("Code coverage") {
+	/*	stage("Code coverage") {
 			steps {
 				sh "./gradlew jacocoTestReport"
 					
@@ -40,6 +40,7 @@ pipeline {
 
 					
 				}
+	*/
 		}
 		
 	}
