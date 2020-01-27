@@ -17,8 +17,7 @@ pipeline {
 			steps {
 				sh "./gradlew jacocoTestReport"
 					
-				script {
-					step([$class: 'JacocoPublisher', execPattern: '*/*.exec'])
+				
 					
 					publishHTML (target: [
 						reportDir: 'build/reports/jacoco/test/html',
@@ -26,6 +25,9 @@ pipeline {
 						reportName: "JaCoCo Report"
 						])
 		    		sh "./gradlew jacocoTestCoverageVerification"
+				script {
+					
+					step([$class: 'JacocoPublisher', execPattern: '*/*.exec'])
 					
    				/*	 step([$class: 'JacocoPublisher',
       						execPattern: 'target/*.exec',
