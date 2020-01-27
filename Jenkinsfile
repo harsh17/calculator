@@ -11,6 +11,10 @@ pipeline {
 		stage("Unit test") {
 			steps {
 				sh "./gradlew test"
+				script {
+					
+					step([$class: 'JacocoPublisher', execPattern: '*/*.exec'])
+					}
 				}
 			}
 		stage("Code coverage") {
@@ -25,9 +29,7 @@ pipeline {
 						reportName: "JaCoCo Report"
 						])
 		    		sh "./gradlew jacocoTestCoverageVerification"
-				script {
-					
-					step([$class: 'JacocoPublisher', execPattern: '*/*.exec'])
+				
 					
    				/*	 step([$class: 'JacocoPublisher',
       						execPattern: 'target/*.exec',
@@ -36,7 +38,7 @@ pipeline {
       						exclusionPattern: 'src/test*'])
 						*/
 
-					}
+					
 				}
 		}
 		
