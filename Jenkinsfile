@@ -23,7 +23,7 @@ pipeline {
 						])
 		    		sh "./gradlew jacocoTestCoverageVerification"
 				script {
-					step([$class: 'JacocoPublisher', execPattern: '**/target/jacoco.exec'])
+					step([$class: 'JacocoPublisher', execPattern: '**/jacoco.exec'])
 					}
 				}
 		}
