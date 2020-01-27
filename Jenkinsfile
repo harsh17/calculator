@@ -26,7 +26,7 @@ pipeline {
 					step([$class: 'JacocoPublisher', execPattern: '**/target/jacoco.exec'])
 					}
 				}
-			}
+		}
 		
 	}
 	post { 
