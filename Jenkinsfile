@@ -16,20 +16,23 @@ pipeline {
 		stage("Code coverage") {
 			steps {
 				sh "./gradlew jacocoTestReport"
+					
+				script {
+					step([$class: 'JacocoPublisher', execPattern: '*/*.exec'])
+					
 					publishHTML (target: [
 						reportDir: 'build/reports/jacoco/test/html',
 						reportFiles: 'index.html',
 						reportName: "JaCoCo Report"
 						])
 		    		sh "./gradlew jacocoTestCoverageVerification"
-				script {
-				//	step([$class: 'JacocoPublisher', execPattern: '*/*.exec'])
 					
-   					 step([$class: 'JacocoPublisher',
+   				/*	 step([$class: 'JacocoPublisher',
       						execPattern: 'target/*.exec',
       						classPattern: 'target/classes',
       						sourcePattern: 'src/main/java',
       						exclusionPattern: 'src/test*'])
+						*/
 
 					}
 				}
