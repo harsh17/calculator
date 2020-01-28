@@ -17,7 +17,7 @@ pipeline {
 					}
 				}
 			}
-	/*	stage("Code coverage") {
+			stage("Code coverage") {
 			steps {
 				sh "./gradlew jacocoTestReport"
 					
@@ -29,22 +29,9 @@ pipeline {
 						reportName: "JaCoCo Report"
 						])
 		    		sh "./gradlew jacocoTestCoverageVerification"
-				
-					
-   				/*	 step([$class: 'JacocoPublisher',
-      						execPattern: 'target/*.exec',
-      						classPattern: 'target/classes',
-      						sourcePattern: 'src/main/java',
-      						exclusionPattern: 'src/test*'])
-						*/
-
-					
+								
 				}
-	
-		// }  
-	*/
-	
-		
+			 }  
 	}
 	post { 
         always { 
@@ -57,7 +44,6 @@ pipeline {
            			  echo "in finally"
          			 }
 			}
-		
-        }
-    }
+		}
+	   }
 }
