@@ -13,7 +13,7 @@ pipeline {
 				sh "./gradlew test"
 				script {
 					
-					step([$class: 'JacocoPublisher', execPattern: '*/*.exec'])
+					step([$class: 'JacocoPublisher', execPattern: '**/*.exec'])
 					}
 				}
 			}
