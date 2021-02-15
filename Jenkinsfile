@@ -6,13 +6,13 @@ pipeline {
 		stage("Compile") {
 			steps {
 				//sh "./gradlew compileJava"
-				bat "/gradlew compileJava"
+				bat "gradlew compileJava"
 				}
 			}
 		stage("Unit test") {
 			steps {
 				// sh "./gradlew test"
-				bat "/gradlew test"
+				bat "gradlew test"
 				script {
 					
 					step([$class: 'JacocoPublisher', execPattern: '**/*.exec'])
@@ -22,7 +22,7 @@ pipeline {
 			stage("Code coverage") {
 			steps {
 				//sh "./gradlew jacocoTestReport"
-				bat "/gradlew jacocoTestReport"
+				bat "gradlew jacocoTestReport"
 					
 				
 					
@@ -32,7 +32,7 @@ pipeline {
 						reportName: "JaCoCo Report"
 						])
 		    		//sh "./gradlew jacocoTestCoverageVerification"
-				bat "/gradlew jacocoTestCoverageVerification"
+				bat "gradlew jacocoTestCoverageVerification"
 								
 				}
 			 }  
