@@ -5,12 +5,14 @@ pipeline {
 		
 		stage("Compile") {
 			steps {
-				sh "./gradlew compileJava"
+				//sh "./gradlew compileJava"
+				bat "/gradlew compileJava"
 				}
 			}
 		stage("Unit test") {
 			steps {
-				sh "./gradlew test"
+				// sh "./gradlew test"
+				bat "/gradlew test"
 				script {
 					
 					step([$class: 'JacocoPublisher', execPattern: '**/*.exec'])
@@ -19,7 +21,8 @@ pipeline {
 			}
 			stage("Code coverage") {
 			steps {
-				sh "./gradlew jacocoTestReport"
+				//sh "./gradlew jacocoTestReport"
+				bat "/gradlew jacocoTestReport"
 					
 				
 					
@@ -28,7 +31,8 @@ pipeline {
 						reportFiles: 'index.html',
 						reportName: "JaCoCo Report"
 						])
-		    		sh "./gradlew jacocoTestCoverageVerification"
+		    		//sh "./gradlew jacocoTestCoverageVerification"
+				bat "/gradlew jacocoTestCoverageVerification"
 								
 				}
 			 }  
@@ -41,7 +45,7 @@ pipeline {
            			 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, selectedTarget: 'grafana'])
 				}
 			finally {
-           			  echo "in finally"
+           			 // echo "in finally"
          			 }
 			}
 		}
