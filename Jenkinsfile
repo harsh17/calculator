@@ -42,7 +42,7 @@ pipeline {
 		script {
          		 try {
 		
-           			 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, selectedTarget: 'grafana'])
+           		//	 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, selectedTarget: 'grafana'])
 				}
 			finally {
            			 // echo "in finally"
