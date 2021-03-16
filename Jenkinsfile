@@ -15,7 +15,9 @@ pipeline {
 		stage("Unit test") {
 			steps {
 				// sh "./gradlew test"
-				bat "gradlew test"
+				  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+					bat "gradlew test"
+				  }
 				script {
 					
 					step([$class: 'JacocoPublisher', execPattern: '**/*.exec'])
@@ -48,7 +50,7 @@ pipeline {
          		 try {
 		
            		//	 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, selectedTarget: 'grafana'])
-				 influxDbPublisher(selectedTarget: 'grafana')
+			//	 influxDbPublisher(selectedTarget: 'grafana')
 				}
 			finally {
            			 // echo "in finally"
