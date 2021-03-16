@@ -1,5 +1,8 @@
 pipeline {
 	agent any
+	environment {
+        LOG_JUNIT_RESULTS = 'true'
+    }
 	
 	stages {
 		
@@ -17,6 +20,7 @@ pipeline {
 					
 					step([$class: 'JacocoPublisher', execPattern: '**/*.exec'])
 					}
+				influxDbPublisher(selectedTarget: 'grafana')
 				}
 			}
 			stage("Code coverage") {
@@ -44,6 +48,7 @@ pipeline {
          		 try {
 		
            		//	 step([$class: 'InfluxDbPublisher', customData: null, customDataMap: null, customPrefix: null, selectedTarget: 'grafana'])
+				 influxDbPublisher(selectedTarget: 'grafana')
 				}
 			finally {
            			 // echo "in finally"
